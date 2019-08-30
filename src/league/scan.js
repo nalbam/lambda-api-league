@@ -28,8 +28,18 @@ module.exports.scan = (event, context, callback) => {
 
     console.log('scan', params);
 
-    // fetch all league-time from the database
-    ddb.scan(params, (error, result) => {
+    // main param
+    params = {
+        TableName: process.env.MAIN_TABLE,
+        Key: {
+            'league': data.league,
+        },
+    };
+
+    console.log('get', params);
+
+    // get league
+    ddb.get(params, (error, result) => {
         // handle potential errors
         if (error) {
             console.error(error);
@@ -40,11 +50,43 @@ module.exports.scan = (event, context, callback) => {
             return;
         }
 
-        // create a response
-        const response = {
-            statusCode: 200,
-            body: JSON.stringify(result.Items),
-        };
-        callback(null, response);
+        console.log('result', result);
+
+        if (!result || !result.Item) {
+            console.error(`No exist : ${data.league}`);
+            callback(null, {
+                statusCode: error.statusCode || 501,
+                body: error,
+            });
+            return;
+        }
+
+        let body = {
+            league: result.Item.league,
+            title: result.Item.title,
+            items: []
+        }
+
+        // fetch all league-time from the database
+        ddb.scan(params, (error, result) => {
+            // handle potential errors
+            if (error) {
+                console.error(error);
+                callback(null, {
+                    statusCode: error.statusCode || 501,
+                    body: error,
+                });
+                return;
+            }
+
+            body.items = result.Items;
+
+            // create a response
+            const response = {
+                statusCode: 200,
+                body: JSON.stringify(body),
+            };
+            callback(null, response);
+        });
     });
 };
