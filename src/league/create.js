@@ -87,7 +87,6 @@ module.exports.create = (event, context, callback) => {
                         racerName: data.racerName,
                         lapTime: data.lapTime,
                     },
-                    ReturnValues: 'ALL_NEW',
                 };
 
                 console.log('put', params);
@@ -105,7 +104,7 @@ module.exports.create = (event, context, callback) => {
                     }
 
                     // response
-                    console.log('time saved. ', result);
+                    console.log('time saved. ', params.Item);
                     const response = {
                         statusCode: 201,
                         body: JSON.stringify(params.Item),
