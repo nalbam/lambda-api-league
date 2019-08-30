@@ -25,8 +25,15 @@ module.exports.create = (event, context, callback) => {
     params = {
         TableName: process.env.MAIN_TABLE,
         Key: {
-            league: data.league,
+            'league': data.league,
         },
+        // KeyConditionExpression: '#league = :league',
+        // ExpressionAttributeNames: {
+        //     '#league': 'league',
+        // },
+        // ExpressionAttributeValues: {
+        //     ':league': data.league,
+        // },
     };
 
     // get league
@@ -42,7 +49,7 @@ module.exports.create = (event, context, callback) => {
         }
 
         if (!result || !result.Item) {
-            console.error(`Not exist : ${data.league}`);
+            console.error(`No exist : ${data.league}`);
             callback(null, {
                 statusCode: error.statusCode || 501,
                 body: error,
@@ -53,14 +60,19 @@ module.exports.create = (event, context, callback) => {
         // time param
         params = {
             TableName: process.env.TIME_TABLE,
-            Key: {
-                league: data.league,
-                email: data.email,
+            KeyConditionExpression: '#league = :league and #email = :email',
+            ExpressionAttributeNames: {
+                '#league': 'league',
+                '#email': 'email',
+            },
+            ExpressionAttributeValues: {
+                ':league': data.league,
+                ':email': data.email,
             },
         };
 
         // get league
-        dynamoDb.get(params, (error, result) => {
+        dynamoDb.query(params, (error, result) => {
             // handle potential errors
             if (error) {
                 console.error(error);
@@ -107,8 +119,8 @@ module.exports.create = (event, context, callback) => {
                 const params = {
                     TableName: process.env.TIME_TABLE,
                     Key: {
-                        league: data.league,
-                        email: data.email,
+                        'league': data.league,
+                        'email': data.email,
                     },
                     UpdateExpression: 'SET name = :name, time = :time',
                     ExpressionAttributeValues: {

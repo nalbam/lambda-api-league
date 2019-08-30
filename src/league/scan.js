@@ -12,12 +12,12 @@ module.exports.scan = (event, context, callback) => {
     if (data && data.league && typeof data.league === 'string') {
         params = {
             TableName: process.env.TIME_TABLE,
-            FilterExpression: "#league = :league",
+            FilterExpression: '#league = :league',
             ExpressionAttributeNames: {
-                "#league": "league"
+                '#league': 'league',
             },
             ExpressionAttributeValues: {
-                ":league": data.league
+                ':league': data.league,
             },
         };
     } else {
