@@ -7,26 +7,18 @@ const ddb = new AWS.DynamoDB.DocumentClient();
 module.exports.scan = (event, context, callback) => {
     const data = event.queryStringParameters;
 
-    let params;
-
-    if (data && data.league && typeof data.league === 'string') {
-        params = {
-            TableName: process.env.TIME_TABLE,
-            FilterExpression: '#league = :league',
-            ExpressionAttributeNames: {
-                '#league': 'league',
+    if (!data || !data.league || typeof data.league !== 'string') {
+        console.error('Validation Failed.');
+        callback(null, {
+            statusCode: 400,
+            body: {
+                error: 'Validation Failed.'
             },
-            ExpressionAttributeValues: {
-                ':league': data.league,
-            },
-        };
-    } else {
-        params = {
-            TableName: process.env.MAIN_TABLE,
-        };
+        });
+        return;
     }
 
-    console.log('scan', params);
+    let params;
 
     // main param
     params = {
@@ -70,6 +62,7 @@ module.exports.scan = (event, context, callback) => {
         // time param
         params = {
             TableName: process.env.TIME_TABLE,
+            ProjectionExpression: "racerName, lapTime",
             Key: {
                 'league': data.league,
             },
