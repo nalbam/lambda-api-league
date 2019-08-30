@@ -67,6 +67,16 @@ module.exports.scan = (event, context, callback) => {
             items: []
         }
 
+        // time param
+        params = {
+            TableName: process.env.TIME_TABLE,
+            Key: {
+                'league': data.league,
+            },
+        };
+
+        console.log('get', params);
+
         // fetch all league-time from the database
         ddb.scan(params, (error, result) => {
             // handle potential errors
