@@ -27,7 +27,8 @@ jobs:
       - run:
           name: Test
           command: |
-            bash ./package.sh
+            terraform init
+            terraform plan -var "build_no=$CIRCLE_BUILD_NUM"
   deploy:
     docker:
       - image: hashicorp/terraform
@@ -37,7 +38,8 @@ jobs:
       - run:
           name: Deploy
           command: |
-            bash ./package.sh
+            terraform init
+            terraform apply -var "build_no=$CIRCLE_BUILD_NUM" -auto-approve
 
 workflows:
   version: 2

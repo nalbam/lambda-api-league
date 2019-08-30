@@ -2,7 +2,7 @@
 
 CMD=${1:-$CIRCLE_JOB}
 
-CIRCLE_BUILDER=${CIRCLE_BUILDER}
+CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM}
 
 _build() {
     rm -rf target
@@ -20,12 +20,12 @@ _build() {
 
 _test() {
     terraform init
-    terraform plan -var "build_no=$CIRCLE_BUILDER"
+    terraform plan -var "build_no=$CIRCLE_BUILD_NUM"
 }
 
 _deploy() {
     terraform init
-    terraform apply -var "build_no=$CIRCLE_BUILDER" -auto-approve
+    terraform apply -var "build_no=$CIRCLE_BUILD_NUM" -auto-approve
 }
 
 case ${CMD} in
