@@ -1,8 +1,6 @@
 'use strict';
 
 const AWS = require('aws-sdk');
-const uuid = require('uuid');
-const moment = require('moment-timezone');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
