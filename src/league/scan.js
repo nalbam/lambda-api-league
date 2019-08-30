@@ -14,7 +14,7 @@ module.exports.scan = (event, context, callback) => {
             TableName: process.env.TIME_TABLE,
             FilterExpression: 'league = :league',
             ExpressionAttributeValues: {
-                ':mac': data.mac
+                ':league': data.league
             },
         };
     } else {
