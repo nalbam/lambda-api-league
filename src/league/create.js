@@ -50,6 +50,8 @@ module.exports.create = (event, context, callback) => {
             return;
         }
 
+        console.log('result', result);
+
         if (!result || !result.Item) {
             console.error(`No exist : ${data.league}`);
             callback(null, {
@@ -90,6 +92,8 @@ module.exports.create = (event, context, callback) => {
                 });
                 return;
             }
+
+            console.log('result', result);
 
             if (!result || !result.Item) {
                 params = {
