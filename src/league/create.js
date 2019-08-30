@@ -36,6 +36,8 @@ module.exports.create = (event, context, callback) => {
         // },
     };
 
+    console.log('get', params);
+
     // get league
     ddb.get(params, (error, result) => {
         // handle potential errors
@@ -75,6 +77,8 @@ module.exports.create = (event, context, callback) => {
             // },
         };
 
+        console.log('get', params);
+
         // get league
         ddb.get(params, (error, result) => {
             // handle potential errors
@@ -88,7 +92,7 @@ module.exports.create = (event, context, callback) => {
             }
 
             if (!result || !result.Item) {
-                const params = {
+                params = {
                     TableName: process.env.TIME_TABLE,
                     Item: {
                         id: uuid.v1(),
@@ -99,8 +103,10 @@ module.exports.create = (event, context, callback) => {
                     },
                 };
 
+                console.log('put', params);
+
                 // create time
-                ddb.put(params, (error) => {
+                ddb.put(params, (error, result) => {
                     // handle potential errors
                     if (error) {
                         console.error(error);
@@ -120,7 +126,7 @@ module.exports.create = (event, context, callback) => {
                     callback(null, response);
                 });
             } else {
-                const params = {
+                params = {
                     TableName: process.env.TIME_TABLE,
                     Key: {
                         'league': data.league,
@@ -133,6 +139,8 @@ module.exports.create = (event, context, callback) => {
                     },
                     ReturnValues: 'ALL_NEW',
                 };
+
+                console.log('update', params);
 
                 // update time
                 ddb.update(params, (error, result) => {

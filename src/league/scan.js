@@ -26,6 +26,8 @@ module.exports.scan = (event, context, callback) => {
         };
     }
 
+    console.log('scan', params);
+
     // fetch all league-time from the database
     ddb.scan(params, (error, result) => {
         // handle potential errors
