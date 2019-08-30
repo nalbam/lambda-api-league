@@ -60,15 +60,6 @@ module.exports.create = (event, context, callback) => {
                 'league': data.league,
                 'email': data.email,
             },
-            // KeyConditionExpression: '#league = :league and #email = :email',
-            // ExpressionAttributeNames: {
-            //     '#league': 'league',
-            //     '#email': 'email',
-            // },
-            // ExpressionAttributeValues: {
-            //     ':league': data.league,
-            //     ':email': data.email,
-            // },
         };
 
         console.log('get', params);
@@ -93,8 +84,8 @@ module.exports.create = (event, context, callback) => {
                     Item: {
                         league: data.league,
                         email: data.email,
-                        name: data.name,
-                        time: data.time,
+                        racerName: data.racerName,
+                        lapTime: data.lapTime,
                     },
                 };
 
@@ -130,10 +121,10 @@ module.exports.create = (event, context, callback) => {
                         'league': data.league,
                         'email': data.email,
                     },
-                    UpdateExpression: 'SET name = :name, time = :time',
+                    UpdateExpression: 'SET racerName = :racerName, lapTime = :lapTime',
                     ExpressionAttributeValues: {
-                        ':name': data.name,
-                        ':time': data.time,
+                        ':racerName': data.lapTime,
+                        ':lapTime': data.lapTime,
                     },
                     ReturnValues: 'ALL_NEW',
                 };
