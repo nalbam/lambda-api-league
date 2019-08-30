@@ -1,0 +1,54 @@
+#
+# CircleCI 2.0
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: Package
+          command: |
+            ./package.sh
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+      - store_artifacts:
+          path: target/lambda.zip
+  test:
+    docker:
+      - image: hashicorp/terraform:light
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Test
+          command: |
+            terraform init
+            terraform plan
+  deploy:
+    docker:
+      - image: hashicorp/terraform:light
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploy
+          command: |
+            terraform init
+            terraform apply -auto-approve
+
+workflows:
+  version: 2
+  apply:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test

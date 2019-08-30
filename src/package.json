@@ -1,0 +1,12 @@
+{
+  "name": "lambda-api-league",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm install -s"
+  },
+  "dependencies": {
+    "moment-timezone": "^0.5.21",
+    "uuid": "^2.0.3"
+  }
+}
