@@ -57,19 +57,19 @@ module.exports.create = (event, context, callback) => {
         // time param
         params = {
             TableName: process.env.TIME_TABLE,
-            // Key: {
-            //     'league': data.league,
-            //     'email': data.email,
+            Key: {
+                'league': data.league,
+                'email': data.email,
+            },
+            // KeyConditionExpression: '#league = :league and #email = :email',
+            // ExpressionAttributeNames: {
+            //     '#league': 'league',
+            //     '#email': 'email',
             // },
-            KeyConditionExpression: '#league = :league and #email = :email',
-            ExpressionAttributeNames: {
-                '#league': 'league',
-                '#email': 'email',
-            },
-            ExpressionAttributeValues: {
-                ':league': data.league,
-                ':email': data.email,
-            },
+            // ExpressionAttributeValues: {
+            //     ':league': data.league,
+            //     ':email': data.email,
+            // },
         };
 
         console.log('get', params);
