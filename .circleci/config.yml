@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Package
           command: |
-            ./package.sh
+            bash ./package.sh
       - persist_to_workspace:
           root: .
           paths:
@@ -27,9 +27,7 @@ jobs:
       - run:
           name: Test
           command: |
-            pwd
-            ls -al
-            ./package.sh
+            bash ./package.sh
   deploy:
     docker:
       - image: hashicorp/terraform:light
@@ -39,7 +37,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-            ./package.sh
+            bash ./package.sh
 
 workflows:
   version: 2
