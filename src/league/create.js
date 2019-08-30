@@ -60,19 +60,23 @@ module.exports.create = (event, context, callback) => {
         // time param
         params = {
             TableName: process.env.TIME_TABLE,
-            KeyConditionExpression: '#league = :league and #email = :email',
-            ExpressionAttributeNames: {
-                '#league': 'league',
-                '#email': 'email',
+            Key: {
+                'league': data.league,
+                'email': data.email,
             },
-            ExpressionAttributeValues: {
-                ':league': data.league,
-                ':email': data.email,
-            },
+            // KeyConditionExpression: '#league = :league and #email = :email',
+            // ExpressionAttributeNames: {
+            //     '#league': 'league',
+            //     '#email': 'email',
+            // },
+            // ExpressionAttributeValues: {
+            //     ':league': data.league,
+            //     ':email': data.email,
+            // },
         };
 
         // get league
-        dynamoDb.query(params, (error, result) => {
+        dynamoDb.get(params, (error, result) => {
             // handle potential errors
             if (error) {
                 console.error(error);
