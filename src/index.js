@@ -7,7 +7,7 @@ exports.handler = (event, context, callback) => {
     console.log('## handler event : ', JSON.stringify(event, null, 2));
 
     const path = event.path; // /league
-    const method = event.httpMethod; // POST, PUT, GET
+    const method = event.httpMethod; // POST, GET
 
     const arr = path.split('/');
     if (arr.length !== 2 || arr[1] !== 'league') {
