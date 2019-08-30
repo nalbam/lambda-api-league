@@ -2,7 +2,7 @@
 
 const AWS = require('aws-sdk');
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const ddb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.scan = (event, context, callback) => {
     const data = event.queryStringParameters;
@@ -27,7 +27,7 @@ module.exports.scan = (event, context, callback) => {
     }
 
     // fetch all league-time from the database
-    dynamoDb.scan(params, (error, result) => {
+    ddb.scan(params, (error, result) => {
         // handle potential errors
         if (error) {
             console.error(error);

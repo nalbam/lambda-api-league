@@ -3,12 +3,12 @@
 const AWS = require('aws-sdk');
 const uuid = require('uuid');
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const ddb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
     const data = JSON.parse(event.body);
 
-    if (data && data.league && typeof data.league !== 'string') {
+    if (!data || !data.league || typeof data.league !== 'string') {
         console.error('Validation Failed.');
         callback(null, {
             statusCode: 400,
@@ -37,7 +37,7 @@ module.exports.create = (event, context, callback) => {
     };
 
     // get league
-    dynamoDb.get(params, (error, result) => {
+    ddb.get(params, (error, result) => {
         // handle potential errors
         if (error) {
             console.error(error);
@@ -76,7 +76,7 @@ module.exports.create = (event, context, callback) => {
         };
 
         // get league
-        dynamoDb.get(params, (error, result) => {
+        ddb.get(params, (error, result) => {
             // handle potential errors
             if (error) {
                 console.error(error);
@@ -100,7 +100,7 @@ module.exports.create = (event, context, callback) => {
                 };
 
                 // create time
-                dynamoDb.put(params, (error) => {
+                ddb.put(params, (error) => {
                     // handle potential errors
                     if (error) {
                         console.error(error);
@@ -135,7 +135,7 @@ module.exports.create = (event, context, callback) => {
                 };
 
                 // update time
-                dynamoDb.update(params, (error, result) => {
+                ddb.update(params, (error, result) => {
                     // handle potential errors
                     if (error) {
                         console.error(error);
