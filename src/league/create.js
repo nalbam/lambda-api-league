@@ -104,7 +104,7 @@ module.exports.create = (event, context, callback) => {
                     }
 
                     // response
-                    console.log('time saved. ', params.Item);
+                    console.log('time saved. ', result);
                     const response = {
                         statusCode: 201,
                         body: JSON.stringify(params.Item),
@@ -144,7 +144,7 @@ module.exports.create = (event, context, callback) => {
                     }
 
                     // response
-                    console.log('time saved. ', params.Key);
+                    console.log('time saved. ', result);
                     const response = {
                         statusCode: 200,
                         body: JSON.stringify(params.Key),
