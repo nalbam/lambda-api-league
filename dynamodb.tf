@@ -34,14 +34,14 @@ resource "aws_dynamodb_table" "league-time" {
   }
 
   attribute {
-    name = "name"
+    name = "email"
     type = "S"
   }
 
   global_secondary_index {
     name               = "league_index"
     hash_key           = "league"
-    range_key          = "name"
+    range_key          = "email"
     write_capacity     = 5
     read_capacity      = 5
     projection_type    = "INCLUDE"
