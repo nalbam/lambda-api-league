@@ -20,13 +20,13 @@ resource "aws_dynamodb_table" "league-time" {
   name           = "${var.stage}-${var.name}-time"
   read_capacity  = 5
   write_capacity = 5
-  hash_key       = "id"
-  range_key      = "league"
+  hash_key       = "league"
+  range_key      = "email"
 
-  attribute {
-    name = "id"
-    type = "S"
-  }
+  # attribute {
+  #   name = "id"
+  #   type = "S"
+  # }
 
   attribute {
     name = "league"
@@ -38,15 +38,15 @@ resource "aws_dynamodb_table" "league-time" {
     type = "S"
   }
 
-  global_secondary_index {
-    name               = "league_index"
-    hash_key           = "league"
-    range_key          = "email"
-    write_capacity     = 5
-    read_capacity      = 5
-    projection_type    = "INCLUDE"
-    non_key_attributes = ["id"]
-  }
+  # global_secondary_index {
+  #   name               = "league_index"
+  #   hash_key           = "league"
+  #   range_key          = "email"
+  #   write_capacity     = 5
+  #   read_capacity      = 5
+  #   projection_type    = "INCLUDE"
+  #   non_key_attributes = ["id"]
+  # }
 
   tags = {
     Name = "${var.stage}-${var.name}-time"

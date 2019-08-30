@@ -123,6 +123,9 @@ module.exports.create = (event, context, callback) => {
                     callback(null, response);
                 });
             } else {
+                // let arr = params.Item.time.split(':');
+                // let time = ((+arr[0]) * 60) + (+arr[1]);
+
                 params = {
                     TableName: process.env.TIME_TABLE,
                     Key: {
