@@ -112,8 +112,15 @@ module.exports.create = (event, context, callback) => {
                     callback(null, response);
                 });
             } else {
-                // let arr = params.Item.time.split(':');
-                // let time = ((+arr[0]) * 60) + (+arr[1]);
+                let a1 = result.Item.lapTime.split(':');
+                let oldLapTime = ((+a1[0]) * 60) + (+a1[1]);
+
+                let a2 = data.lapTime.split(':');
+                let newLapTime = ((+a2[0]) * 60) + (+a2[1]);
+
+                if (oldLapTime < newLapTime) {
+                    data.lapTime = result.Item.lapTime;
+                }
 
                 params = {
                     TableName: process.env.TIME_TABLE,
