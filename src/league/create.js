@@ -1,7 +1,6 @@
 'use strict';
 
 const AWS = require('aws-sdk');
-const uuid = require('uuid');
 
 const ddb = new AWS.DynamoDB.DocumentClient();
 
@@ -92,7 +91,6 @@ module.exports.create = (event, context, callback) => {
                 params = {
                     TableName: process.env.TIME_TABLE,
                     Item: {
-                        id: uuid.v1(),
                         league: data.league,
                         email: data.email,
                         name: data.name,
