@@ -62,10 +62,17 @@ module.exports.scan = (event, context, callback) => {
         // time param
         params = {
             TableName: process.env.TIME_TABLE,
-            ProjectionExpression: "racerName, lapTime",
-            Key: {
-                'league': data.league,
+            ProjectionExpression: 'racerName, lapTime',
+            FilterExpression: '#league = :league',
+            ExpressionAttributeNames: {
+                '#league': 'league',
             },
+            ExpressionAttributeValues: {
+                ':league': data.league,
+            },
+            // Key: {
+            //     'league': data.league,
+            // },
         };
 
         console.log('get', params);
