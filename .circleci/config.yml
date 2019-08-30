@@ -28,7 +28,7 @@ jobs:
           name: Test
           command: |
             terraform init
-            terraform plan -var "build_no=$CIRCLE_BUILD_NUM"
+            terraform plan -var build_no=${CIRCLE_BUILD_NUM}
   deploy:
     docker:
       - image: hashicorp/terraform
@@ -39,7 +39,7 @@ jobs:
           name: Deploy
           command: |
             terraform init
-            terraform apply -var "build_no=$CIRCLE_BUILD_NUM" -auto-approve
+            terraform apply -var build_no=${CIRCLE_BUILD_NUM} -auto-approve
 
 workflows:
   version: 2
