@@ -123,7 +123,7 @@ module.exports.create = (event, context, callback) => {
                     },
                     UpdateExpression: 'SET racerName = :racerName, lapTime = :lapTime',
                     ExpressionAttributeValues: {
-                        ':racerName': data.lapTime,
+                        ':racerName': data.racerName,
                         ':lapTime': data.lapTime,
                     },
                     ReturnValues: 'ALL_NEW',
