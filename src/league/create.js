@@ -11,9 +11,7 @@ module.exports.create = (event, context, callback) => {
         console.error('Validation Failed.');
         callback(null, {
             statusCode: 400,
-            body: {
-                error: 'Validation Failed.'
-            },
+            body: JSON.stringify({ error: 'Validation Failed.' }),
         });
         return;
     }

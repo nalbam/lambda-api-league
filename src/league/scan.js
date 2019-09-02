@@ -11,9 +11,7 @@ module.exports.scan = (event, context, callback) => {
         console.error('Validation Failed.');
         callback(null, {
             statusCode: 400,
-            body: {
-                error: 'Validation Failed.'
-            },
+            body: JSON.stringify({ error: 'Validation Failed.' }),
         });
         return;
     }
@@ -57,7 +55,7 @@ module.exports.scan = (event, context, callback) => {
             league: result.Item.league,
             title: result.Item.title,
             logo: result.Item.logo ? result.Item.logo : '',
-            items: []
+            items: [],
         }
 
         // time param
@@ -71,9 +69,6 @@ module.exports.scan = (event, context, callback) => {
             ExpressionAttributeValues: {
                 ':league': data.league,
             },
-            // Key: {
-            //     'league': data.league,
-            // },
         };
 
         console.log('get', params);
