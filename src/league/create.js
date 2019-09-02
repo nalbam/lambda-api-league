@@ -152,7 +152,7 @@ module.exports.create = (event, context, callback) => {
                     console.log('time saved. ', result);
                     const response = {
                         statusCode: 200,
-                        body: JSON.stringify(result.Attributes),
+                        body: JSON.stringify(params.Key),
                     };
                     callback(null, response);
                 });
