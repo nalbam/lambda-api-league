@@ -56,7 +56,7 @@ module.exports.scan = (event, context, callback) => {
         let body = {
             league: result.Item.league,
             title: result.Item.title,
-            logo: result.Item.logo,
+            logo: result.Item.logo ? result.Item.logo : '',
             items: []
         }
 
