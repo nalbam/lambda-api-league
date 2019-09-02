@@ -43,10 +43,10 @@ module.exports.scan = (event, context, callback) => {
         console.log('result', result);
 
         if (!result || !result.Item) {
-            console.error(`No exist : ${data.league}`);
+            console.error(`Not found : ${data.league}`);
             callback(null, {
-                statusCode: 500,
-                body: error,
+                statusCode: 404,
+                body: 'Not found.',
             });
             return;
         }
