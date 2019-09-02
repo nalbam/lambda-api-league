@@ -34,7 +34,7 @@ module.exports.create = (event, context, callback) => {
         if (error) {
             console.error(error);
             callback(null, {
-                statusCode: error.statusCode || 501,
+                statusCode: 500,
                 body: error,
             });
             return;
@@ -45,7 +45,7 @@ module.exports.create = (event, context, callback) => {
         if (!result || !result.Item) {
             console.error(`No exist : ${data.league}`);
             callback(null, {
-                statusCode: error.statusCode || 501,
+                statusCode: 500,
                 body: error,
             });
             return;
@@ -68,7 +68,7 @@ module.exports.create = (event, context, callback) => {
             if (error) {
                 console.error(error);
                 callback(null, {
-                    statusCode: error.statusCode || 501,
+                    statusCode: 500,
                     body: error,
                 });
                 return;
@@ -95,7 +95,7 @@ module.exports.create = (event, context, callback) => {
                     if (error) {
                         console.error(error);
                         callback(null, {
-                            statusCode: error.statusCode || 501,
+                            statusCode: 500,
                             body: error,
                         });
                         return;
@@ -142,7 +142,7 @@ module.exports.create = (event, context, callback) => {
                     if (error) {
                         console.error(error);
                         callback(null, {
-                            statusCode: error.statusCode || 501,
+                            statusCode: 500,
                             body: error,
                         });
                         return;

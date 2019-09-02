@@ -34,7 +34,7 @@ module.exports.scan = (event, context, callback) => {
         if (error) {
             console.error(error);
             callback(null, {
-                statusCode: error.statusCode || 501,
+                statusCode: 500,
                 body: error,
             });
             return;
@@ -45,7 +45,7 @@ module.exports.scan = (event, context, callback) => {
         if (!result || !result.Item) {
             console.error(`No exist : ${data.league}`);
             callback(null, {
-                statusCode: error.statusCode || 501,
+                statusCode: 500,
                 body: error,
             });
             return;
@@ -54,7 +54,7 @@ module.exports.scan = (event, context, callback) => {
         let body = {
             league: result.Item.league,
             title: result.Item.title,
-            logo: result.Item.logo ? result.Item.logo : '',
+            logo: result.Item.logo,
             items: [],
         }
 
@@ -79,7 +79,7 @@ module.exports.scan = (event, context, callback) => {
             if (error) {
                 console.error(error);
                 callback(null, {
-                    statusCode: error.statusCode || 501,
+                    statusCode: 500,
                     body: error,
                 });
                 return;
