@@ -76,6 +76,8 @@ module.exports.create = (event, context, callback) => {
 
             console.log('result', result);
 
+            let datetime = new Date().getTime();
+
             if (!result || !result.Item) {
                 params = {
                     TableName: process.env.TIME_TABLE,
@@ -84,7 +86,7 @@ module.exports.create = (event, context, callback) => {
                         email: data.email,
                         racerName: data.racerName,
                         lapTime: data.lapTime,
-                        registered: new Date().getTime(),
+                        registered: datetime,
                     },
                 };
 
@@ -131,7 +133,7 @@ module.exports.create = (event, context, callback) => {
                     ExpressionAttributeValues: {
                         ':racerName': data.racerName,
                         ':lapTime': data.lapTime,
-                        ':modified': new Date().getTime(),
+                        ':modified': datetime,
                     },
                     ReturnValues: 'ALL_NEW',
                 };
