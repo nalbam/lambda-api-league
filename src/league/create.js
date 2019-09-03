@@ -84,6 +84,7 @@ module.exports.create = (event, context, callback) => {
                         email: data.email,
                         racerName: data.racerName,
                         lapTime: data.lapTime,
+                        registered: new Date().getTime(),
                     },
                 };
 
@@ -126,10 +127,11 @@ module.exports.create = (event, context, callback) => {
                         'league': data.league,
                         'email': data.email,
                     },
-                    UpdateExpression: 'SET racerName = :racerName, lapTime = :lapTime',
+                    UpdateExpression: 'SET racerName = :racerName, lapTime = :lapTime, modified = :modified',
                     ExpressionAttributeValues: {
                         ':racerName': data.racerName,
                         ':lapTime': data.lapTime,
+                        ':modified': new Date().getTime(),
                     },
                     ReturnValues: 'ALL_NEW',
                 };
