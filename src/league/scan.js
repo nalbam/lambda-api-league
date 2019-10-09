@@ -55,6 +55,7 @@ module.exports.scan = (event, context, callback) => {
             league: result.Item.league,
             title: result.Item.title,
             logo: result.Item.logo,
+            anim: result.Item.anim,
             items: [],
         }
 
