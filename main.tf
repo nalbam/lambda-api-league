@@ -1,5 +1,18 @@
 # Terraform Main
 
+terraform {
+  backend "s3" {
+    region = "ap-northeast-2"
+    bucket = "terraform-nalbam-seoul"
+    key    = "dev-api-league.tfstate"
+  }
+  required_version = ">= 0.12"
+}
+
+provider "aws" {
+  region = var.region
+}
+
 module "domain" {
   source = "git::https://github.com/nalbam/terraform-aws-route53.git"
   domain = var.domain
@@ -31,8 +44,4 @@ module "dev-lambda" {
     MAIN_TABLE = "${var.stage}-${var.name}-main"
     TIME_TABLE = "${var.stage}-${var.name}-time"
   }
-}
-
-output "url" {
-  value = "https://${module.dev-lambda.domain}/league"
 }
