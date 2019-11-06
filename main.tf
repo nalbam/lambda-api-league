@@ -22,17 +22,16 @@ module "dev-lambda" {
   source = "git::https://github.com/nalbam/terraform-aws-lambda-api.git"
   region = var.region
 
-  name         = var.name
-  stage        = var.stage
-  description  = "api > lambda > league"
-  runtime      = "nodejs10.x"
-  handler      = "index.handler"
-  memory_size  = 512
-  timeout      = 5
-  s3_bucket    = var.s3_bucket
-  s3_source    = "target/lambda.zip"
-  s3_key       = "lambda/${var.name}/${var.name}-${var.build_no}.zip"
-  http_methods = ["ANY"]
+  name        = var.name
+  stage       = var.stage
+  description = "api > lambda > league"
+  runtime     = "nodejs10.x"
+  handler     = "index.handler"
+  memory_size = 512
+  timeout     = 5
+  s3_bucket   = var.s3_bucket
+  s3_source   = "target/lambda.zip"
+  s3_key      = "lambda/${var.name}/${var.name}-${var.build_no}.zip"
 
   // domain
   zone_id         = module.domain.zone_id
