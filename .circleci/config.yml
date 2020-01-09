@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Package
           command: |
-            bash ./package.sh
+            bash ./package.sh build
       - persist_to_workspace:
           root: .
           paths:
