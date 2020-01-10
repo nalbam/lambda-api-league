@@ -27,7 +27,7 @@ module "dev-lambda" {
   description = "api > lambda > league"
   runtime     = "nodejs10.x"
   handler     = "index.handler"
-  memory_size = 512
+  memory_size = 1024
   timeout     = 5
   s3_bucket   = var.s3_bucket
   s3_source   = "target/lambda.zip"
